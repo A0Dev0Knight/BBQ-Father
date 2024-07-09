@@ -545,12 +545,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79cfcba63ba2ed4d88d446d55c696be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cookTime: 100
+  cookTime: 25
   rawMaterial: {fileID: 2100000, guid: f2da99394efaa2d4f9f23587062e4e07, type: 2}
   cookedMaterial: {fileID: 2100000, guid: 60ef3d67a1a9f434f978c55d81d953d0, type: 2}
   burntMaterial: {fileID: 2100000, guid: 5422a1123a9ac6a40964c025b4f9efc5, type: 2}
-  cookedWindowA: 40
-  cookedWindowB: 60
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

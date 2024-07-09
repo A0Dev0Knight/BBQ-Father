@@ -10,16 +10,28 @@ public class food : MonoBehaviour
     [SerializeField] private Material cookedMaterial;
     [SerializeField] private Material burntMaterial;
     
-    [SerializeField] private float cookedWindowA;
-    [SerializeField] private float cookedWindowB;
+    private float cookedWindowA;
+    private float cookedWindowB;
     
     private bool burned = false;
     private bool wellDone = false;
     private MeshRenderer foodMeshRenderer;
 
-    void updateFoodCookState(float time)
+    public bool GetWellDoneBool
     {
-        if (cookedWindowB < time)
+        get{
+            return wellDone;
+        }
+    }
+    void GenerateCookedWindow()
+    {
+        cookedWindowB = Random.Range(10, cookTime - 10);
+        int padding = Random.Range(3, 10);
+        cookedWindowA = cookedWindowB - padding;
+    }
+    void UpdateFoodCookState(float time)
+    {
+        if (time > cookedWindowB)
         {
             foodMeshRenderer.material = new Material(rawMaterial);
             wellDone = false;
@@ -38,6 +50,7 @@ public class food : MonoBehaviour
                 {
                     foodMeshRenderer.material = new Material(burntMaterial);
                     wellDone = false;
+                    burned = true;
                 }
             }
         }
@@ -48,17 +61,19 @@ public class food : MonoBehaviour
         if (!burned && cookTime > 0)
         {
             cookTime -= Time.deltaTime;
-            updateFoodCookState(cookTime);
+            UpdateFoodCookState(cookTime);
         }
         else
         {
             burned = true;
+            Debug.Log("COOKED!");
         }
     }
     // Start is called before the first frame update
     void Start()
     {
         foodMeshRenderer = GetComponent<MeshRenderer>();
+        GenerateCookedWindow();
     }
 
     // Update is called once per frame
